@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h5 class="modal-title"><span *ngIf="!nodeData.id">Добавление</span><span *ngIf="nodeData.id">Редактирование</span>
+        документа</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="nodeForm">
+        <div class="mb-2">
+            <label for="nameInput" class="form-label"><strong>Название</strong></label>
+            <input type="text" class="form-control" id="nameInput" formControlName="name">
+        </div>
+        <div class="mb-2">
+            <label for="nameInput" class="form-label"><strong>Дата создания</strong></label>
+
+            <div class="input-group">
+                <input class="form-control" name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i class="bi bi-calendar3"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label for="linkInput" class="form-label"><strong>Ссылка</strong></label>
+            <input type="text" class="form-control" id="linkInput" formControlName="link">
+        </div>
+        <div class="mb-2">
+            <label for="linkInput" class="form-label">Ответственный</label>
+            <input type="text" class="form-control" id="linkInput" formControlName="owner">
+        </div>
+        <div class="mb-2">
+            <label for="commentInput" class="form-label">Комментарий</label>
+            <textarea class="form-control" id="commentInput" formControlName="comment"></textarea>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" (click)="save()" [disabled]="nodeForm.invalid">Сохранить</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">Закрыть</button>
+</div>

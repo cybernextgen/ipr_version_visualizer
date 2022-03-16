@@ -1,0 +1,40 @@
+<div class="row vh-100">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;" bis_skin_checked="1">
+        <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img src="/assets/img/logo.png" width="30" height="30" alt="" class="me-2">
+            <span class="fs-5">ИПР: версионирование</span>
+        </div>
+        <hr>
+        <div class="input-group input-group-sm mb-3">
+            <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon1" (click)="resetFilter()"><i
+                    class="bi bi-x-lg"></i></button>
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm" placeholder="Фильтр..." [(ngModel)]="filter"
+                (ngModelChange)="filterChanged()">
+        </div>
+        <div class="d-grid gap-2">
+            <ng-container *ngFor="let p of periods; index as i">
+                <button class="btn" type="button" (click)="selectPeriod(p.id)"
+                    [ngClass]="{'btn-primary': currentPeriod.id == p.id}">{{p.name}}</button>
+            </ng-container>
+            <p *ngIf="!periods.length" class="text-center text-muted">Интервалы не найдены</p>
+        </div>
+        <div class="flex-column mb-auto">
+
+        </div>
+        <hr>
+        <button class="btn btn-outline-secondary mb-2" *ngIf="isEditMode" (click)="editDocument()">Добавить
+            документ</button>
+        <button class="btn btn-outline-secondary mb-2" *ngIf="isEditMode" (click)="editPeriod()">Добавить
+            интервал</button>
+        <button class="btn btn-outline-secondary mb-2" (click)="save()" *ngIf="isEditMode">Сохранить</button>
+        <button class="btn btn-outline-secondary" (click)="openLoginModal()" *ngIf="!user.id">Войти для
+            редактирования</button>
+        <button class="btn btn-outline-primary" (click)="logout()" *ngIf="user.id">Выйти {{user.username}}</button>
+    </div>
+    <div class="col">
+        <div class="wrapper">
+            <div id="drawflow"></div>
+        </div>
+    </div>
+</div>

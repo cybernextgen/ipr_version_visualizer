@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h5 class="modal-title">Добавление интервала</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="periodForm" (ngSubmit)="save()" (keyup.enter)="save()">
+        <div>
+            <label for="name">Название</label>
+            <input type="text" formControlName="name" class="form-control" />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="periodForm.invalid" (click)="save()">Сохранить</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">Закрыть</button>
+</div>
