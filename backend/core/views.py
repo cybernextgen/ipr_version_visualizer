@@ -51,13 +51,11 @@ class PeriodViewSet(viewsets.ModelViewSet):
 
 
 def login_view(request):
-    print(request.body)
     if request.method == 'POST':
         credentials = json.loads(request.body)
         username = credentials['username']
         user = authenticate(username=username,
                             password=credentials['password'])
-
         if user is not None:
             login(request, user)
             stored_user = User.objects.get(username=username)

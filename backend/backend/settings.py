@@ -76,8 +76,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+ASSETS_DIR = BASE_DIR / "core" / "static" / "core" / "assets"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "static",
+    ASSETS_DIR
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -88,6 +91,5 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
     ]
 }
