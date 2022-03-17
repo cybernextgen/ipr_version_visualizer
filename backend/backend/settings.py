@@ -79,7 +79,6 @@ STATIC_URL = 'static/'
 ASSETS_DIR = BASE_DIR / "core" / "static" / "core" / "assets"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
     ASSETS_DIR
 ]
 

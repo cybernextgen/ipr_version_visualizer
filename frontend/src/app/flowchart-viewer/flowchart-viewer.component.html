@@ -32,7 +32,7 @@
                 интервал</button>
         </div>
         <button class="btn btn-outline-primary mb-2" (click)="save()" *ngIf="isEditMode">Сохранить</button>
-        <button class="btn btn-primary" (click)="openLoginModal()" *ngIf="!user.id">Войти для
+        <button class="btn btn-outline-primary" (click)="openLoginModal()" *ngIf="!user.id">Войти для
             редактирования</button>
         <button class="btn btn-outline-primary" (click)="logout()" *ngIf="user.id">Выйти {{user.username}}</button>
     </div>

@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend",
+            "outputPath": "../backend/core/static/core/",
             "outputHashing": "none",
             "index": "src/index.html",
             "main": "src/main.ts",

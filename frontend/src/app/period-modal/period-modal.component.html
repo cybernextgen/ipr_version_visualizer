@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h5 class="modal-title">Добавление интервала</h5>
+    <h5 class="modal-title"><span *ngIf="!editedPeriod.id">Добавление</span><span
+            *ngIf="editedPeriod.id">Изменение</span> интервала</h5>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 <div class="modal-body">
