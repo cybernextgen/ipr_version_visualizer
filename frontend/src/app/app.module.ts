@@ -12,8 +12,9 @@ import { LoginModalComponent } from './login-modal/login-modal.component'
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlowchartNodeModalComponent } from './flowchart-node-modal/flowchart-node-modal.component'
-import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardModule } from 'ngx-clipboard'
 import { PeriodModalComponent } from './period-modal/period-modal.component'
+
 
 @NgModule({
   declarations: [
