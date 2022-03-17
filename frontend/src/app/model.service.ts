@@ -39,7 +39,7 @@ export class ModelService<T extends DomainModel> {
     }
   }
 
-  delete(id: string){  
+  delete(id: string|number){  
     return this.http.delete<T>(`${this.url}${id}/`).pipe(tap(
       () => this.toastService.showSuccess('Объект уделён успешно!')))
   }

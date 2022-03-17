@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, LOCALE_ID } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AppRoutingModule } from './app-routing.module'
@@ -14,7 +14,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlowchartNodeModalComponent } from './flowchart-node-modal/flowchart-node-modal.component'
 import { ClipboardModule } from 'ngx-clipboard'
 import { PeriodModalComponent } from './period-modal/period-modal.component'
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
+registerLocaleData(localeRu);
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { PeriodModalComponent } from './period-modal/period-modal.component'
     LoginModalComponent,
     FlowchartNodeModalComponent,
     PeriodModalComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { PeriodModalComponent } from './period-modal/period-modal.component'
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'ru' }
   ],
   bootstrap: [AppComponent]
 })

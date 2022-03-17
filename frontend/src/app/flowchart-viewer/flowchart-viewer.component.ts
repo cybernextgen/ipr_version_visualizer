@@ -50,10 +50,15 @@ export class FlowchartViewerComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       const currentPeriodId = params['period_id']
       if(currentPeriodId){
-        this.periodService.get(currentPeriodId).subscribe((result) => {
-          this.currentPeriod = result
-          this.redrawFlowchart()
-        })
+        this.periodService.get(currentPeriodId).subscribe({
+          next: (result) => {
+            this.currentPeriod = result
+            this.redrawFlowchart()
+          },
+          error: () => {
+            this.router.navigate([], {relativeTo:this.activatedRoute})
+          }
+        }) 
       }else{
         this.periodService.getList().subscribe((result) => {
           if(result.length){
@@ -128,6 +133,10 @@ export class FlowchartViewerComponent implements OnInit {
 
   editPeriod(editedPeriod?: Period): void {
     const modalRef = this.modalService.open(PeriodModalComponent, { size: 'md' })
+    if(editedPeriod){
+      modalRef.componentInstance.editedPeriod = editedPeriod
+    }
+
     modalRef.result.then(() => {
       this.loadPeriods()
     })
@@ -175,8 +184,16 @@ export class FlowchartViewerComponent implements OnInit {
           this.editor.editor_mode = 'view'
         }
         this.editor.start()
-        this.editor.zoom_value = 0.1
-        this.editor.zoom = 0.75
+        this.editor.zoom_value = 0.075
+        this.editor.zoom_min = 0.3
+        this.editor.zoom_max = 1.3
+
+        const storedZoom = localStorage.getItem('zoom')
+        let currentZoom = 1
+        if(storedZoom){
+          currentZoom = parseFloat(storedZoom)
+        }
+        this.editor.zoom = currentZoom
         this.editor.zoom_refresh()
 
         this.editor.on('nodeSelected', id => {
@@ -185,6 +202,10 @@ export class FlowchartViewerComponent implements OnInit {
 
         this.editor.on('nodeSelected', id => {
           this.editedNode = this.editor.getNodeFromId(id)
+        })
+
+        this.editor.on('zoom', (currentZoom) => {
+          localStorage.setItem('zoom', currentZoom)
         })
 
         this.editor.on('contextmenu', event => {
@@ -200,11 +221,12 @@ export class FlowchartViewerComponent implements OnInit {
           }
         })
       } else {
-        console.error('Drawflow host element does not exist')
+        this.toastService.showDanger('Не удалось инициализировать библиотеку DrawFlow, родительский элемент не существует!')
       }
 
     } catch (exception) {
       console.error('Unable to start Drawflow', exception)
+      this.toastService.showDanger('Не удалось инициализировать библиотеку DrawFlow!')
     }
   }
   
